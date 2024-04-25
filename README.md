@@ -15,6 +15,12 @@ That's why the duplication check fails now.
 
 ## Your task - reduce the amount of code
 
-More code means more to read and understand. Duplication would need any changes to be done multiple times.
+More code means:
+- more to read and understand
+- more scope for mistakes
+- changes to be duplicated in multiple places
 
-Refactor the code using any technique you like, to reduce the amount of code and remove duplication.
+**Part 1**: Refactor the code to reduce the amount of code and remove duplication.
+
+**Part 2**: Open the Test Explorer in Visual Studio and run the tests. One test fails due to a bug in `AddBrighteningImage`.
+While fixing the bug, also look at ways in which the mistake can be caught at compile time itself.

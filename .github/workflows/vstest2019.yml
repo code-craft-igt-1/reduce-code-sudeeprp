@@ -27,11 +27,11 @@ jobs:
 
     - name: Run executable
       run: |
-         Write-Host "Find and execute"
-         $exePath = Get-ChildItem -Path "x64\Debug" -Filter "*.exe" -Recurse | Select-Object -First 1 -ExpandProperty FullName
-         if ($exePath) {
-            Write-Host "Executable found: $exePath"
-            & $exePath
+         Write-Host "Find and test"
+         $dllPath = Get-ChildItem -Path "x64\Debug" -Filter "*.dll" -Recurse | Select-Object -First 1 -ExpandProperty FullName
+         if ($dllPath) {
+            Write-Host "Test container found: $dllPath"
+            & vstest.console.exe dllPath
          } else {
-           Write-Host "No Executable found."
+           Write-Host "No test container dll found."
          }
