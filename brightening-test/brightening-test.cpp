@@ -1,44 +1,48 @@
-#include "CppUnitTest.h"
+#include <gtest/gtest.h>
+#include <memory>
 #include "../brightener.h"
 
-using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+namespace brighteningtest {
 
-namespace brighteningtest
-{
-	TEST_CLASS(BrighteningTest)
-	{
-	public:
-		
-		TEST_METHOD(BrightensWholeImage)
-		{
-			auto image = std::make_shared<Image>(2, 2);
-			image->pixels[0] = 45; image->pixels[1] = 55;
-			image->pixels[2] = 65; image->pixels[3] = 254;
+class BrighteningTest : public ::testing::Test {
+ protected:
+    std::shared_ptr<Image> image;
+    void SetUp() override {
+    }
+    void TearDown() override {
+    }
+};
 
-			ImageBrightener brightener(image);
-			int attenuatedCount = brightener.BrightenWholeImage();
-			Assert::AreEqual(1, attenuatedCount);
-			Assert::AreEqual(90, int(image->pixels[2]));
-		}
+TEST_F(BrighteningTest, BrightensWholeImage) {
+    image = std::make_shared<Image>(2, 2);
+    image->pixels[0] = 45; image->pixels[1] = 55;
+    image->pixels[2] = 65; image->pixels[3] = 254;
 
-		TEST_METHOD(BrightensWithAnotherImage)
-		{
-			auto image = std::make_shared<Image>(2, 2);
-			image->pixels[0] = 45; image->pixels[1] = 55;
-			image->pixels[2] = 65; image->pixels[3] = 75;
-            ImageBrightener brightener(image);
-            
-            // Test by brightening only the right part
-            auto brighteningImage = std::make_shared<Image>(2, 2);
-            brighteningImage->pixels[0] = 0; brighteningImage->pixels[1] = 25;
-            brighteningImage->pixels[2] = 0; brighteningImage->pixels[3] = 25;
+    ImageBrightener brightener(image);
+    int attenuatedCount = brightener.BrightenWholeImage();
 
-            int attenuatedCount = 0;
-            bool succeeded = brightener.AddBrighteningImage(brighteningImage, attenuatedCount);
-            Assert::IsTrue(succeeded);
-            Assert::AreEqual(45, int(image->pixels[0])); // left-side pixel is unchanged
-            Assert::AreEqual(80, int(image->pixels[1])); // right-side pixel is brightened
-            Assert::AreEqual(0, attenuatedCount);
-		}
-	};
+    EXPECT_EQ(attenuatedCount, 1);         // Verify the number of attenuated pixels
+    EXPECT_EQ(image->pixels[2], 90);      // Verify the expected brightened pixel value
 }
+
+TEST_F(BrighteningTest, BrightensWithAnotherImage) {
+    image = std::make_shared<Image>(2, 2);
+    image->pixels[0] = 45; image->pixels[1] = 55;
+    image->pixels[2] = 65; image->pixels[3] = 75;
+
+    ImageBrightener brightener(image);
+
+    auto brighteningImage = std::make_shared<Image>(2, 2);
+    brighteningImage->pixels[0] = 0; brighteningImage->pixels[1] = 25;
+    brighteningImage->pixels[2] = 0; brighteningImage->pixels[3] = 25;
+
+    int attenuatedCount = 0;
+    bool succeeded = brightener.AddBrighteningImage(brighteningImage, attenuatedCount);
+
+    EXPECT_TRUE(succeeded);               // Check if the operation succeeded
+    EXPECT_EQ(image->pixels[0], 45);      // Verify the left-side pixel is unchanged
+    EXPECT_EQ(image->pixels[1], 80);      // Verify the right-side pixel is brightened
+    EXPECT_EQ(attenuatedCount, 0);        // Verify no pixels were attenuated
+}
+
+}  // namespace brighteningtest

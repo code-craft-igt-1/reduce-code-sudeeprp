@@ -1,4 +1,4 @@
-#include "brightener.h"
+#include "./brightener.h"
 
 ImageBrightener::ImageBrightener(std::shared_ptr<Image> inputImage): m_inputImage(inputImage) {
 }
@@ -30,7 +30,7 @@ bool ImageBrightener::AddBrighteningImage(std::shared_ptr<Image> imageToAdd, int
     for (int x = 0; x < m_inputImage->m_rows; x++) {
         for (int y = 0; y < m_inputImage->m_columns; y++) {
             int pixelIndex = x * m_inputImage->m_columns + y;
-            if (int(m_inputImage->pixels[pixelIndex]) + imageToAdd->pixels[pixelIndex] > 255) {
+            if (static_cast<int>(m_inputImage->pixels[pixelIndex]) + imageToAdd->pixels[pixelIndex] > 255) {
                 ++attenuatedCount;
                 m_inputImage->pixels[pixelIndex] = 255;
             } else {

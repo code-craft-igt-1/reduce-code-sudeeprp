@@ -1,0 +1,22 @@
+name: cmake and test
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install CMake
+      uses: jwlawson/actions-setup-cmake@v2
+
+    - name: Configure CMake
+      run: cmake -S . -B build
+
+    - name: Build
+      run: cmake --build build
+
+    - name: Run executable
+      run: cd build && ctest
