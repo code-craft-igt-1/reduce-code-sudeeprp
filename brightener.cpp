@@ -34,7 +34,7 @@ bool ImageBrightener::AddBrighteningImage(std::shared_ptr<Image> imageToAdd, int
                 ++attenuatedCount;
                 m_inputImage->pixels[pixelIndex] = 255;
             } else {
-                imageToAdd->pixels[pixelIndex] += m_inputImage->pixels[pixelIndex];
+                m_inputImage->pixels[pixelIndex] += imageToAdd->pixels[pixelIndex];
             }
         }
     }
