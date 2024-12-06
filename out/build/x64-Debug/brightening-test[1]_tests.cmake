@@ -1,5 +1,0 @@
-add_test([=[BrighteningTest.BrightensWholeImage]=]  C:/Users/ing02340/source/igt-icc/code-craft-igt-1/reduce-code-sudeeprp/out/build/x64-Debug/brightening-test.exe [==[--gtest_filter=BrighteningTest.BrightensWholeImage]==] --gtest_also_run_disabled_tests)
-set_tests_properties([=[BrighteningTest.BrightensWholeImage]=]  PROPERTIES WORKING_DIRECTORY C:/Users/ing02340/source/igt-icc/code-craft-igt-1/reduce-code-sudeeprp/out/build/x64-Debug SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
-add_test([=[BrighteningTest.BrightensWithAnotherImage]=]  C:/Users/ing02340/source/igt-icc/code-craft-igt-1/reduce-code-sudeeprp/out/build/x64-Debug/brightening-test.exe [==[--gtest_filter=BrighteningTest.BrightensWithAnotherImage]==] --gtest_also_run_disabled_tests)
-set_tests_properties([=[BrighteningTest.BrightensWithAnotherImage]=]  PROPERTIES WORKING_DIRECTORY C:/Users/ing02340/source/igt-icc/code-craft-igt-1/reduce-code-sudeeprp/out/build/x64-Debug SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
-set(  brightening-test_TESTS BrighteningTest.BrightensWholeImage BrighteningTest.BrightensWithAnotherImage)

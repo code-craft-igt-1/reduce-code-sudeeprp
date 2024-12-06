@@ -1,5 +1,0 @@
-if(EXISTS "C:/Users/ing02340/source/igt-icc/code-craft-igt-1/reduce-code-sudeeprp/out/build/x64-Debug/brightening-test[1]_tests.cmake")
-  include("C:/Users/ing02340/source/igt-icc/code-craft-igt-1/reduce-code-sudeeprp/out/build/x64-Debug/brightening-test[1]_tests.cmake")
-else()
-  add_test(brightening-test_NOT_BUILT brightening-test_NOT_BUILT)
-endif()
