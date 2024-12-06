@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <memory>
+#include <tuple>
 #include "./image.h"
 
 class ImageBrightener {
@@ -10,5 +11,5 @@ class ImageBrightener {
  public:
     explicit ImageBrightener(std::shared_ptr<Image> inputImage);
     int BrightenWholeImage();
-    bool AddBrighteningImage(std::shared_ptr<Image> imageToAdd, int& attenuatedCount);
+    std::tuple<bool, int> AddBrighteningImage(std::shared_ptr<Image> imageToAdd);
 };
