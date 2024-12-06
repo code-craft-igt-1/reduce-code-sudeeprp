@@ -1,0 +1,3 @@
+BrighteningTest.BrightensWholeImage 1 0.10423
+BrighteningTest.BrightensWithAnotherImage 1 0.124736
+---
